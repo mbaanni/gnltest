@@ -81,27 +81,16 @@ char	*join_rest(char *line, char *buf)
 	int	j;
 
 	i = 0;
-	while(buf[i] && buf[i] != '\n')
+	while(buf[i])
 		i++;
-	if (buf[i] == '\n')
-		i++;
-	line = malloc(sizeof(char) * i);
+	line = malloc(sizeof(char) * (i + 1));
 	if (!line)
 		return (0);
 	j = 0;
-	while(buf[j] && buf[j] != '\n')
-	{
-		line[j] = buf[j];
-		buf[j++] = buf[i++];
-	}
-	if(buf[j] == '\n')
-	{
-		line[j] = '\n';
-		i++;
-	}
-	line[++j] = 0;
+	i = 0;
 	while(buf[j])
-		buf[j++] = buf[i++];
-	buf[j] = 0;
+		line[i++] = buf[j++];
+	*buf = 0;
+	line[i] = 0;
 	return (line);
 }
